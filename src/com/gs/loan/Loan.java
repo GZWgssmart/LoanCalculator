@@ -82,4 +82,24 @@ public class Loan {
     public void setAllLoans(List<LoanByMonth> allLoans) {
         this.allLoans = allLoans;
     }
+
+    @Override
+    public String toString() {
+        String allLoansStr = "";
+        if (allLoans != null) {
+            for (LoanByMonth loanByMonth : allLoans) {
+                String lbmStr = "月份: " + loanByMonth.getMonth() + "\t第" + loanByMonth.getYear() + "年\t第" +
+                        loanByMonth.getMonthInYear() + "月\t" + "月供: " + loanByMonth.getRepayment() +
+                        "\t本金: " + loanByMonth.getPayPrincipal() + "\t利息: " + loanByMonth.getInterest() +
+                        "\t剩余贷款: " + loanByMonth.getRemainTotal();
+                if (allLoansStr.equals("")) {
+                    allLoansStr = lbmStr;
+                } else {
+                    allLoansStr += "\n" + lbmStr;
+                }
+            }
+        }
+        return "每月还款: " + getAvgRepayment() + "\t总利息: " + getTotalInterest() +
+                "\t还款总额：" + getTotalRepayment() + "\t首月还款: " + getFirstRepayment() + "\n" + allLoansStr;
+    }
 }
